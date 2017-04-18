@@ -1,5 +1,7 @@
-<html lang="en"><head>
-    <title>Code coverage report for node-npmtest-configstore/configstore/index.js</title>
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for node-npmtest-configstore/node_modules/configstore/index.js</title>
     <meta charset="utf-8">
     <style>
         body, html {
@@ -192,7 +194,7 @@
     <h1 style="font-weight: bold;">
         <a href="https://github.com/npmtest/node-npmtest-configstore">npmtest-configstore (v0.0.1)</a>
     </h1>
-    <h1>Code coverage report for <span class="entity">node-npmtest-configstore/configstore/index.js</span></h1>
+    <h1>Code coverage report for <span class="entity">node-npmtest-configstore/node_modules/configstore/index.js</span></h1>
     <h2>
         
         Statements: <span class="metric">27.66% <small>(13 / 47)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
@@ -208,11 +210,11 @@
         
         Ignored: <span class="metric"><span class="ignore-none">none</span></span> &nbsp;&nbsp;&nbsp;&nbsp;
     </h2>
-    <div class="path"><a href="../../index.html">All files</a> » <a href="index.html">node-npmtest-configstore/configstore/</a> » index.js</div>
+    <div class="path"><a href="../../../index.html">All files</a> &#187; <a href="index.html">node-npmtest-configstore/node_modules/configstore/</a> &#187; index.js</div>
 </div>
 <div class="body">
 <pre><table class="coverage">
-<tbody><tr><td class="line-count">1
+<tr><td class="line-count">1
 2
 3
 4
@@ -420,101 +422,100 @@ const writeFileAtomic = require('write-file-atomic');
 const dotProp = require('dot-prop');
 const uniqueString = require('unique-string');
 &nbsp;
-const configDir = xdgBasedir.config || <span class="branch-1 cbranch-no" title="branch not covered">path.join(os.tmpdir(), uniqueString());</span>
+const configDir = xdgBasedir.config || <span class="branch-1 cbranch-no" title="branch not covered" >path.join(os.tmpdir(), uniqueString());</span>
 const permissionError = 'You don\'t have access to this file.';
 const defaultPathMode = 0o0700;
 const writeFileOptions = {mode: 0o0600};
 &nbsp;
 class Configstore {
-	constructor<span class="fstat-no" title="function not covered">(id, defaults, opts) {</span>
-<span class="cstat-no" title="statement not covered">		opts = opts || {};</span>
+	constructor<span class="fstat-no" title="function not covered" >(id, defaults, opts) {</span>
+<span class="cstat-no" title="statement not covered" >		opts = opts || {};</span>
 &nbsp;
-<span class="cstat-no" title="statement not covered">		const pathPrefix = opts.globalConfigPath ?</span>
+<span class="cstat-no" title="statement not covered" >		const pathPrefix = opts.globalConfigPath ?</span>
 			path.join(id, 'config.json') :
 			path.join('configstore', `${id}.json`);
 &nbsp;
-<span class="cstat-no" title="statement not covered">		this.path = path.join(configDir, pathPrefix);</span>
-<span class="cstat-no" title="statement not covered">		this.all = Object.assign({}, defaults, this.all);</span>
+<span class="cstat-no" title="statement not covered" >		this.path = path.join(configDir, pathPrefix);</span>
+<span class="cstat-no" title="statement not covered" >		this.all = Object.assign({}, defaults, this.all);</span>
 	}
-	get all<span class="fstat-no" title="function not covered">() {</span>
-<span class="cstat-no" title="statement not covered">		try {</span>
-<span class="cstat-no" title="statement not covered">			return JSON.parse(fs.readFileSync(this.path, 'utf8'));</span>
+	get all<span class="fstat-no" title="function not covered" >() {</span>
+<span class="cstat-no" title="statement not covered" >		try {</span>
+<span class="cstat-no" title="statement not covered" >			return JSON.parse(fs.readFileSync(this.path, 'utf8'));</span>
 		} catch (err) {
 			// Create dir if it doesn't exist
-<span class="cstat-no" title="statement not covered">			if (err.code === 'ENOENT') {</span>
-<span class="cstat-no" title="statement not covered">				mkdirp.sync(path.dirname(this.path), defaultPathMode);</span>
-<span class="cstat-no" title="statement not covered">				return {};</span>
+<span class="cstat-no" title="statement not covered" >			if (err.code === 'ENOENT') {</span>
+<span class="cstat-no" title="statement not covered" >				mkdirp.sync(path.dirname(this.path), defaultPathMode);</span>
+<span class="cstat-no" title="statement not covered" >				return {};</span>
 			}
 &nbsp;
 			// Improve the message of permission errors
-<span class="cstat-no" title="statement not covered">			if (err.code === 'EACCES') {</span>
-<span class="cstat-no" title="statement not covered">				err.message = `${err.message}\n${permissionError}\n`;</span>
+<span class="cstat-no" title="statement not covered" >			if (err.code === 'EACCES') {</span>
+<span class="cstat-no" title="statement not covered" >				err.message = `${err.message}\n${permissionError}\n`;</span>
 			}
 &nbsp;
 			// Empty the file if it encounters invalid JSON
-<span class="cstat-no" title="statement not covered">			if (err.name === 'SyntaxError') {</span>
-<span class="cstat-no" title="statement not covered">				writeFileAtomic.sync(this.path, '', writeFileOptions);</span>
-<span class="cstat-no" title="statement not covered">				return {};</span>
+<span class="cstat-no" title="statement not covered" >			if (err.name === 'SyntaxError') {</span>
+<span class="cstat-no" title="statement not covered" >				writeFileAtomic.sync(this.path, '', writeFileOptions);</span>
+<span class="cstat-no" title="statement not covered" >				return {};</span>
 			}
 &nbsp;
-<span class="cstat-no" title="statement not covered">			throw err;</span>
+<span class="cstat-no" title="statement not covered" >			throw err;</span>
 		}
 	}
-	set all<span class="fstat-no" title="function not covered">(val) {</span>
-<span class="cstat-no" title="statement not covered">		try {</span>
+	set all<span class="fstat-no" title="function not covered" >(val) {</span>
+<span class="cstat-no" title="statement not covered" >		try {</span>
 			// Make sure the folder exists as it could have been deleted in the meantime
-<span class="cstat-no" title="statement not covered">			mkdirp.sync(path.dirname(this.path), defaultPathMode);</span>
+<span class="cstat-no" title="statement not covered" >			mkdirp.sync(path.dirname(this.path), defaultPathMode);</span>
 &nbsp;
-<span class="cstat-no" title="statement not covered">			writeFileAtomic.sync(this.path, JSON.stringify(val, null, '\t'), writeFileOptions);</span>
+<span class="cstat-no" title="statement not covered" >			writeFileAtomic.sync(this.path, JSON.stringify(val, null, '\t'), writeFileOptions);</span>
 		} catch (err) {
 			// Improve the message of permission errors
-<span class="cstat-no" title="statement not covered">			if (err.code === 'EACCES') {</span>
-<span class="cstat-no" title="statement not covered">				err.message = `${err.message}\n${permissionError}\n`;</span>
+<span class="cstat-no" title="statement not covered" >			if (err.code === 'EACCES') {</span>
+<span class="cstat-no" title="statement not covered" >				err.message = `${err.message}\n${permissionError}\n`;</span>
 			}
 &nbsp;
-<span class="cstat-no" title="statement not covered">			throw err;</span>
+<span class="cstat-no" title="statement not covered" >			throw err;</span>
 		}
 	}
-	get size<span class="fstat-no" title="function not covered">() {</span>
-<span class="cstat-no" title="statement not covered">		return Object.keys(this.all || {}).length;</span>
+	get size<span class="fstat-no" title="function not covered" >() {</span>
+<span class="cstat-no" title="statement not covered" >		return Object.keys(this.all || {}).length;</span>
 	}
-	get<span class="fstat-no" title="function not covered">(key) {</span>
-<span class="cstat-no" title="statement not covered">		return dotProp.get(this.all, key);</span>
+	get<span class="fstat-no" title="function not covered" >(key) {</span>
+<span class="cstat-no" title="statement not covered" >		return dotProp.get(this.all, key);</span>
 	}
-	set<span class="fstat-no" title="function not covered">(key, val) {</span>
-<span class="cstat-no" title="statement not covered">		const config = this.all;</span>
+	set<span class="fstat-no" title="function not covered" >(key, val) {</span>
+<span class="cstat-no" title="statement not covered" >		const config = this.all;</span>
 &nbsp;
-<span class="cstat-no" title="statement not covered">		if (arguments.length === 1) {</span>
-<span class="cstat-no" title="statement not covered">			for (const k of Object.keys(key)) {</span>
-<span class="cstat-no" title="statement not covered">				dotProp.set(config, k, key[k]);</span>
+<span class="cstat-no" title="statement not covered" >		if (arguments.length === 1) {</span>
+<span class="cstat-no" title="statement not covered" >			for (const k of Object.keys(key)) {</span>
+<span class="cstat-no" title="statement not covered" >				dotProp.set(config, k, key[k]);</span>
 			}
 		} else {
-<span class="cstat-no" title="statement not covered">			dotProp.set(config, key, val);</span>
+<span class="cstat-no" title="statement not covered" >			dotProp.set(config, key, val);</span>
 		}
 &nbsp;
-<span class="cstat-no" title="statement not covered">		this.all = config;</span>
+<span class="cstat-no" title="statement not covered" >		this.all = config;</span>
 	}
-	has<span class="fstat-no" title="function not covered">(key) {</span>
-<span class="cstat-no" title="statement not covered">		return dotProp.has(this.all, key);</span>
+	has<span class="fstat-no" title="function not covered" >(key) {</span>
+<span class="cstat-no" title="statement not covered" >		return dotProp.has(this.all, key);</span>
 	}
-	delete<span class="fstat-no" title="function not covered">(key) {</span>
-<span class="cstat-no" title="statement not covered">		const config = this.all;</span>
-<span class="cstat-no" title="statement not covered">		dotProp.delete(config, key);</span>
-<span class="cstat-no" title="statement not covered">		this.all = config;</span>
+	delete<span class="fstat-no" title="function not covered" >(key) {</span>
+<span class="cstat-no" title="statement not covered" >		const config = this.all;</span>
+<span class="cstat-no" title="statement not covered" >		dotProp.delete(config, key);</span>
+<span class="cstat-no" title="statement not covered" >		this.all = config;</span>
 	}
-	clear<span class="fstat-no" title="function not covered">() {</span>
-<span class="cstat-no" title="statement not covered">		this.all = {};</span>
+	clear<span class="fstat-no" title="function not covered" >() {</span>
+<span class="cstat-no" title="statement not covered" >		this.all = {};</span>
 	}
 }
 &nbsp;
 module.exports = Configstore;
 &nbsp;
 &nbsp;</pre></td></tr>
-</tbody></table></pre>
+</table></pre>
 </div>
 <div class="footer">
-    <div class="meta">Generated by <a href="https://github.com/kaizhu256/node-utility2" target="_blank">utility2</a> at Tue Apr 11 2017 19:42:24 GMT+0000 (UTC)</div>
+    <div class="meta">Generated by <a href="https://github.com/kaizhu256/node-utility2" target="_blank">utility2</a> at Tue Apr 18 2017 18:25:52 GMT+0000 (UTC)</div>
 </div>
-
-
-</body></html>
+</body>
+</html>
